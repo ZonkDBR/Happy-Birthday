@@ -1,522 +1,491 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Happy Birthday, Rara 🤍</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
-  /* ============================================================
-     ROOT & RESET
-  ============================================================ */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ============================================================
+   ROOT & RESET
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --blush: #f5c6d0;
-    --blush-light: #fde8ed;
-    --lavender: #d8c9e8;
-    --lavender-light: #ede5f5;
-    --cream: #fdf6f0;
-    --cream-deep: #f5ede3;
-    --rose: #d4778a;
-    --rose-deep: #b55470;
-    --mauve: #9b7fa8;
-    --text-dark: #3a2a35;
-    --text-mid: #6b4f5e;
-    --text-light: #9c7f8e;
-    --shadow: 0 8px 40px rgba(180,120,140,0.13);
-    --shadow-strong: 0 16px 60px rgba(180,120,140,0.22);
-    --radius: 20px;
-    --max-w: 760px;
-  }
+:root {
+  --blush: #f5c6d0;
+  --blush-light: #fde8ed;
+  --lavender: #d8c9e8;
+  --lavender-light: #ede5f5;
+  --cream: #fdf6f0;
+  --cream-deep: #f5ede3;
+  --rose: #d4778a;
+  --rose-deep: #b55470;
+  --mauve: #9b7fa8;
+  --text-dark: #3a2a35;
+  --text-mid: #6b4f5e;
+  --text-light: #9c7f8e;
+  --shadow: 0 8px 40px rgba(180,120,140,0.13);
+  --shadow-strong: 0 16px 60px rgba(180,120,140,0.22);
+  --radius: 20px;
+  --max-w: 760px;
+}
 
-  html { scroll-behavior: smooth; font-size: 16px; }
-  body {
-    font-family: 'Jost', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
-    line-height: 1.7;
-  }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
 
-  /* ============================================================
-     SCROLL PROGRESS BAR
-  ============================================================ */
-  #progress-bar {
-    position: fixed; top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--rose), var(--mauve));
-    width: 0%; z-index: 1000;
-    transition: width 0.1s linear;
-  }
+/* ============================================================
+   SCROLL PROGRESS BAR
+============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose), var(--mauve));
+  width: 0%; z-index: 1000;
+  transition: width 0.1s linear;
+}
 
-  /* ============================================================
+/* ============================================================
    MUSIC INTRO OVERLAY
 ============================================================ */
-
 #music-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(253, 246, 240, 0.96);
+  position: fixed; inset: 0;
+  background: rgba(253,246,240,0.97);
   backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5000;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5000; padding: 24px;
   animation: fadeIn 0.6s ease;
 }
-
 .music-box {
   background: white;
-  padding: 40px 32px;
-  border-radius: 20px;
-  max-width: 420px;
+  padding: clamp(28px, 6vw, 48px) clamp(24px, 5vw, 40px);
+  border-radius: var(--radius);
+  max-width: 400px; width: 100%;
   text-align: center;
-  box-shadow: 0 16px 60px rgba(180,120,140,0.22);
+  box-shadow: var(--shadow-strong);
 }
-
+.music-box-icon { font-size: 2rem; margin-bottom: 14px; }
 .music-text {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem;
-  color: #6b4f5e;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-mid);
+  margin-bottom: 28px;
+  line-height: 1.65;
 }
-
-.music-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
+.music-actions { display: flex; flex-direction: column; gap: 12px; }
 .music-btn {
-  padding: 14px 20px;
+  padding: 14px 20px; border-radius: 50px;
+  border: 1.5px solid var(--rose); background: transparent;
+  cursor: pointer; font-family: 'Jost', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--rose-deep);
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.music-btn.primary {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: white; border: none;
+}
+.music-btn:active { transform: scale(0.97); }
+
+/* ============================================================
+   FIXED CONTROLS (pill: music + lang) — bottom center
+============================================================ */
+#fixed-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%; transform: translateX(-50%);
+  z-index: 999;
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 8px 16px;
   border-radius: 50px;
-  border: 1.5px solid #d4778a;
+  box-shadow: 0 4px 24px rgba(180,120,140,0.2);
+  border: 1px solid rgba(245,198,208,0.5);
+  white-space: nowrap;
+}
+
+.ctrl-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%; border: 1.5px solid var(--blush);
   background: transparent;
   cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-family: 'Jost', sans-serif;
+  font-weight: 500; letter-spacing: 0.03em;
+  color: var(--rose-deep);
+  transition: transform 0.25s, background 0.25s, color 0.25s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; flex-shrink: 0;
+}
+.ctrl-btn:active { transform: scale(0.93); }
+.ctrl-btn.active-lang {
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: #fff; border-color: transparent;
+}
+
+#song-title {
+  font-size: 10px; color: var(--rose-deep);
   font-family: 'Jost', sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+  max-width: 110px; line-height: 1.3;
+  text-align: center; display: none;
+  overflow: hidden; text-overflow: ellipsis;
+}
+#song-title.visible { display: block; }
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes floatHeart {
+  0%   { transform: translateY(0) rotate(-10deg) scale(1); opacity: 0.7; }
+  50%  { transform: translateY(-18px) rotate(10deg) scale(1.1); opacity: 1; }
+  100% { transform: translateY(0) rotate(-10deg) scale(1); opacity: 0.7; }
+}
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(212,119,138,0.4); }
+  50%       { box-shadow: 0 0 36px rgba(212,119,138,0.7), 0 0 60px rgba(155,127,168,0.3); }
+}
+@keyframes particleFloat {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+  33%  { transform: translateY(-30px) translateX(15px) scale(1.2); opacity: 1; }
+  66%  { transform: translateY(-15px) translateX(-10px) scale(0.9); opacity: 0.8; }
+  100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+}
+@keyframes blink {
+  0%, 100% { border-color: var(--rose); }
+  50%       { border-color: transparent; }
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
 }
 
-.music-btn.primary {
-  background: linear-gradient(135deg, #d4778a, #9b7fa8);
-  color: white;
-  border: none;
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Language switch fade */
+.lang-switching [data-i18n],
+.lang-switching [data-i18n-html] {
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.music-btn:hover {
-  transform: scale(1.04);
+/* ============================================================
+   SECTIONS SHARED
+============================================================ */
+section { padding: clamp(60px, 10vw, 100px) clamp(18px, 5vw, 24px); }
+.container { max-width: var(--max-w); margin: 0 auto; }
+
+.section-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400; color: var(--text-dark);
+  line-height: 1.25; margin-bottom: 24px;
 }
 
-  /* ============================================================
-     FIXED CONTROLS (music + language toggle)
-  ============================================================ */
-  #fixed-controls {
-    position: fixed;
-    bottom: 28px; right: 28px;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: center;
-  }
+/* ============================================================
+   HERO SECTION
+============================================================ */
+#hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 40px clamp(18px, 6vw, 40px) 100px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(-45deg, #fde8ed, #ede5f5, #fdf6f0, #f5e8ef, #e8d8f5);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+.heart-bg {
+  position: absolute; opacity: 0.18;
+  animation: floatHeart ease-in-out infinite;
+  pointer-events: none; user-select: none;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  animation: fadeUp 1.2s ease 0.3s both;
+}
+.hero-tag {
+  display: inline-block; font-family: 'Jost', sans-serif;
+  font-size: clamp(0.62rem, 1.8vw, 0.72rem);
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--rose); background: rgba(255,255,255,0.6);
+  border: 1px solid var(--blush); padding: 7px 18px;
+  border-radius: 50px; margin-bottom: 26px;
+  backdrop-filter: blur(6px);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.6rem, 10vw, 5.5rem);
+  font-weight: 300; color: var(--text-dark);
+  line-height: 1.12; margin-bottom: 20px;
+}
+.hero-title em { font-style: italic; color: var(--rose-deep); }
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem); font-style: italic;
+  color: var(--text-mid); max-width: 480px;
+  margin: 0 auto 40px; line-height: 1.65;
+}
+.btn-primary {
+  display: inline-block; padding: 15px 36px;
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  color: #fff; border: none; border-radius: 60px;
+  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  animation: glowPulse 2.5s ease-in-out infinite;
+  transition: transform 0.25s; text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary:active { transform: scale(0.97); }
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: var(--text-light); font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  animation: fadeIn 1s ease 2.5s both;
+}
+.scroll-hint::after {
+  content: ''; display: block; width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--rose), transparent);
+}
 
-  #song-title {
-    font-size: 11px;
-    max-width: 120px;
-    text-align: center;
-    color: #b54470;
-    font-family: 'Jost', sans-serif;
-    line-height: 1.3;
-  }
+/* ============================================================
+   LETTER SECTION
+============================================================ */
+#letter { background: var(--cream-deep); }
+.letter-card {
+  background: #fff; border-radius: var(--radius);
+  padding: clamp(28px, 6vw, 60px);
+  box-shadow: var(--shadow-strong); position: relative; overflow: hidden;
+}
+.letter-card::before {
+  content: '❝'; font-family: 'Cormorant Garamond', serif;
+  font-size: 7rem; color: var(--blush);
+  position: absolute; top: -8px; left: 14px; opacity: 0.35; line-height: 1;
+}
+.letter-date {
+  font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 28px;
+}
+.letter-p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--text-mid); line-height: 1.85; margin-bottom: 20px;
+}
+#typed-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  color: var(--text-mid); line-height: 1.85; margin-bottom: 20px;
+  border-right: 2px solid var(--rose);
+  animation: blink 0.8s step-end infinite;
+  display: inline; white-space: pre-wrap;
+}
+.letter-sign {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 1.35rem; color: var(--rose-deep); margin-top: 32px;
+}
 
-  .music-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
+/* ============================================================
+   TIMELINE SECTION
+============================================================ */
+#timeline { background: var(--lavender-light); }
+.timeline-wrap { position: relative; }
+.timeline-wrap::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--blush), var(--lavender), transparent);
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: grid; grid-template-columns: 1fr 40px 1fr;
+  gap: 0 20px; margin-bottom: 50px; align-items: start;
+  opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item.visible { opacity: 1 !important; transform: translateX(0) !important; }
+.tl-item:nth-child(odd)  { transform: translateX(-30px); }
+.tl-item:nth-child(even) { transform: translateX(30px); }
+.tl-content { background: #fff; border-radius: 16px; padding: clamp(18px, 4vw, 28px); box-shadow: var(--shadow); }
+.tl-item:nth-child(even) .tl-content  { grid-column: 3; }
+.tl-item:nth-child(even) .tl-spacer   { grid-column: 1; grid-row: 1; }
+.tl-item:nth-child(even) .tl-dot-wrap { grid-column: 2; grid-row: 1; }
+.tl-dot-wrap { display: flex; align-items: flex-start; justify-content: center; padding-top: 20px; }
+.tl-dot {
+  width: 13px; height: 13px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--mauve));
+  box-shadow: 0 0 0 4px rgba(212,119,138,0.18); flex-shrink: 0;
+}
+.tl-image {
+  width: 100%; height: 90px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--blush-light), var(--lavender-light));
+  margin-bottom: 14px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--text-dark); margin-bottom: 7px; }
+.tl-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.65; }
 
-  .ctrl-btn {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    border: 1.5px solid var(--blush);
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(10px);
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 15px;
-    font-family: 'Jost', sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--rose-deep);
-    box-shadow: 0 4px 20px rgba(180,120,140,0.18);
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    user-select: none;
-  }
-  .ctrl-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(180,120,140,0.3); }
-  .ctrl-btn.lang-active { background: linear-gradient(135deg, var(--rose), var(--mauve)); color: #fff; border-color: transparent; }
-
-  /* ============================================================
-     ANIMATIONS
-  ============================================================ */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes floatHeart {
-    0%   { transform: translateY(0) rotate(-10deg) scale(1); opacity: 0.7; }
-    50%  { transform: translateY(-18px) rotate(10deg) scale(1.1); opacity: 1; }
-    100% { transform: translateY(0) rotate(-10deg) scale(1); opacity: 0.7; }
-  }
-  @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  @keyframes glowPulse {
-    0%, 100% { box-shadow: 0 0 18px rgba(212,119,138,0.4); }
-    50%       { box-shadow: 0 0 36px rgba(212,119,138,0.7), 0 0 60px rgba(155,127,168,0.3); }
-  }
-  @keyframes particleFloat {
-    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
-    33%  { transform: translateY(-30px) translateX(15px) scale(1.2); opacity: 1; }
-    66%  { transform: translateY(-15px) translateX(-10px) scale(0.9); opacity: 0.8; }
-    100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
-  }
-  @keyframes blink {
-    0%, 100% { border-color: var(--rose); }
-    50%       { border-color: transparent; }
-  }
-  @keyframes heartBeat {
-    0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.25); }
-  }
-  @keyframes langFlip {
-    0%   { opacity: 0; transform: translateY(6px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(28px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* lang transition on all i18n elements */
-  [data-i18n], [data-i18n-html] {
-    transition: opacity 0.25s ease;
-  }
-  .lang-switching [data-i18n],
-  .lang-switching [data-i18n-html] {
-    opacity: 0;
-  }
-
-  /* ============================================================
-     SECTION SHARED
-  ============================================================ */
-  section { padding: 100px 24px; }
-  .container { max-width: var(--max-w); margin: 0 auto; }
-  .section-label {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--rose);
-    margin-bottom: 14px;
-  }
-  h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    color: var(--text-dark);
-    line-height: 1.25;
-    margin-bottom: 24px;
-  }
-
-  /* ============================================================
-     HERO SECTION
-  ============================================================ */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 40px 24px;
-    position: relative; overflow: hidden;
-    background: linear-gradient(-45deg, #fde8ed, #ede5f5, #fdf6f0, #f5e8ef, #e8d8f5);
-    background-size: 400% 400%;
-    animation: gradientShift 12s ease infinite;
-  }
-  .heart-bg {
-    position: absolute; font-size: 1.5rem; opacity: 0.18;
-    animation: floatHeart ease-in-out infinite;
-    pointer-events: none; user-select: none;
-  }
-  .hero-inner {
-    position: relative; z-index: 2;
-    animation: fadeUp 1.2s ease 0.3s both;
-  }
-  .hero-tag {
-    display: inline-block;
-    font-family: 'Jost', sans-serif;
-    font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--rose); background: rgba(255,255,255,0.6);
-    border: 1px solid var(--blush); padding: 7px 18px;
-    border-radius: 50px; margin-bottom: 30px; backdrop-filter: blur(6px);
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 8vw, 5.5rem);
-    font-weight: 300; color: var(--text-dark);
-    line-height: 1.12; margin-bottom: 22px; letter-spacing: -0.01em;
-  }
-  .hero-title em { font-style: italic; color: var(--rose-deep); }
-  .hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.05rem, 2.5vw, 1.35rem); font-style: italic;
-    color: var(--text-mid); max-width: 520px;
-    margin: 0 auto 44px; line-height: 1.65;
-  }
-  .btn-primary {
-    display: inline-block; padding: 15px 40px;
-    background: linear-gradient(135deg, var(--rose), var(--mauve));
-    color: #fff; border: none; border-radius: 60px;
-    font-family: 'Jost', sans-serif; font-size: 0.88rem;
-    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
-    animation: glowPulse 2.5s ease-in-out infinite;
-    transition: transform 0.3s; text-decoration: none;
-  }
-  .btn-primary:hover { transform: scale(1.05); }
-  .scroll-hint {
-    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
-    color: var(--text-light); font-size: 0.72rem;
-    letter-spacing: 0.15em; text-transform: uppercase;
-    animation: fadeIn 1s ease 2s both;
-  }
-  .scroll-hint::after {
-    content: ''; display: block; width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--rose), transparent);
-  }
-
-  /* ============================================================
-     LETTER SECTION
-  ============================================================ */
-  #letter { background: var(--cream-deep); }
-  .letter-card {
-    background: #fff; border-radius: var(--radius);
-    padding: clamp(32px, 6vw, 64px);
-    box-shadow: var(--shadow-strong); position: relative; overflow: hidden;
-  }
-  .letter-card::before {
-    content: '❝'; font-family: 'Cormorant Garamond', serif;
-    font-size: 8rem; color: var(--blush);
-    position: absolute; top: -10px; left: 16px; opacity: 0.4; line-height: 1;
-  }
-  .letter-date {
-    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--text-light); margin-bottom: 32px;
-  }
-  .letter-p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-    color: var(--text-mid); line-height: 1.85; margin-bottom: 24px;
-  }
-  #typed-line {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-    color: var(--text-mid); line-height: 1.85; margin-bottom: 24px;
-    border-right: 2px solid var(--rose);
-    animation: blink 0.8s step-end infinite;
-    display: inline; white-space: pre-wrap;
-  }
-  .letter-sign {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: 1.4rem; color: var(--rose-deep); margin-top: 36px;
-  }
-
-  /* ============================================================
-     TIMELINE SECTION
-  ============================================================ */
-  #timeline { background: var(--lavender-light); }
-  .timeline-wrap { position: relative; }
-  .timeline-wrap::before {
-    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-    width: 1px; background: linear-gradient(to bottom, transparent, var(--blush), var(--lavender), transparent);
-    transform: translateX(-50%);
-  }
+@media (max-width: 560px) {
+  .timeline-wrap::before { left: 18px; transform: none; }
   .tl-item {
-    display: grid; grid-template-columns: 1fr 40px 1fr;
-    gap: 0 20px; margin-bottom: 60px; align-items: start;
-    opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease;
+    grid-template-columns: 36px 1fr;
+    transform: translateX(-20px) !important;
   }
-  .tl-item.visible { opacity: 1 !important; transform: translateX(0) !important; }
-  .tl-item:nth-child(odd)  { transform: translateX(-30px); }
-  .tl-item:nth-child(even) { transform: translateX(30px); }
-  .tl-content { background: #fff; border-radius: 16px; padding: 28px; box-shadow: var(--shadow); }
-  .tl-item:nth-child(even) .tl-content  { grid-column: 3; }
-  .tl-item:nth-child(even) .tl-spacer   { grid-column: 1; grid-row: 1; }
-  .tl-item:nth-child(even) .tl-dot-wrap { grid-column: 2; grid-row: 1; }
-  .tl-dot-wrap { display: flex; align-items: flex-start; justify-content: center; padding-top: 22px; }
-  .tl-dot {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--rose), var(--mauve));
-    box-shadow: 0 0 0 4px rgba(212,119,138,0.2); flex-shrink: 0;
-  }
-  .tl-image {
-    width: 100%; height: 110px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--blush-light), var(--lavender-light));
-    margin-bottom: 16px; display: flex; align-items: center; justify-content: center;
-    color: var(--text-light); font-size: 1.5rem;
-  }
-  .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
-  .tl-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.65; }
+  .tl-dot-wrap { grid-column: 1 !important; grid-row: 1 !important; padding-top: 18px; }
+  .tl-content { grid-column: 2 !important; grid-row: 1 !important; }
+  .tl-spacer { display: none; }
+}
 
-  @media (max-width: 640px) {
-    .timeline-wrap::before { left: 20px; transform: none; }
-    .tl-item { grid-template-columns: 40px 1fr; }
-    .tl-dot-wrap { grid-column: 1 !important; grid-row: 1 !important; }
-    .tl-content { grid-column: 2 !important; grid-row: 1 !important; }
-    .tl-spacer { display: none; }
-    .tl-item:nth-child(odd), .tl-item:nth-child(even) { transform: translateX(-20px); }
-  }
-
-  /* ============================================================
-     SUPPORT SECTION
-  ============================================================ */
-  #support { background: var(--cream); text-align: center; }
-  .support-msg-box {
-    min-height: 80px; display: flex;
-    align-items: center; justify-content: center;
-    margin: 36px auto; max-width: 540px;
-  }
-  .support-msg {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-style: italic;
-    color: var(--text-dark);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    line-height: 1.5;
-  }
-  .support-msg.fade-out { opacity: 0; transform: translateY(-8px); }
-  .support-msg.fade-in  { opacity: 1; transform: translateY(0); }
-  .btn-support {
-    padding: 16px 44px; background: transparent;
-    border: 1.5px solid var(--rose); border-radius: 60px;
-    color: var(--rose-deep); font-family: 'Jost', sans-serif;
-    font-size: 0.88rem; letter-spacing: 0.12em;
-    text-transform: uppercase; cursor: pointer;
-    transition: background 0.35s, color 0.35s, box-shadow 0.35s;
-  }
+/* ============================================================
+   SUPPORT SECTION
+============================================================ */
+#support { background: var(--cream); text-align: center; }
+.support-msg-box {
+  min-height: 80px; display: flex;
+  align-items: center; justify-content: center;
+  margin: 32px auto; max-width: 520px; padding: 0 8px;
+}
+.support-msg {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 4vw, 1.85rem); font-style: italic;
+  color: var(--text-dark);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  line-height: 1.5;
+}
+.support-msg.fade-out { opacity: 0; transform: translateY(-8px); }
+.support-msg.fade-in  { opacity: 1; transform: translateY(0); }
+.btn-support {
+  padding: 15px clamp(24px, 6vw, 44px);
+  background: transparent; border: 1.5px solid var(--rose);
+  border-radius: 60px; color: var(--rose-deep);
+  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  -webkit-tap-highlight-color: transparent;
+  max-width: 90vw;
+}
+.btn-support:active { background: var(--rose); color: #fff; }
+@media (hover: hover) {
   .btn-support:hover { background: var(--rose); color: #fff; box-shadow: 0 0 28px rgba(212,119,138,0.4); }
-  .click-count { margin-top: 20px; font-size: 0.78rem; color: var(--text-light); letter-spacing: 0.1em; }
+}
+.click-count { margin-top: 18px; font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.08em; }
 
-  /* ============================================================
-     HOPE SECTION
-  ============================================================ */
-  #hope {
-    background: linear-gradient(160deg, #f5e8ef 0%, #ede5f5 100%);
-    position: relative; overflow: hidden; text-align: center;
-  }
-  .particles-wrap { position: absolute; inset: 0; pointer-events: none; }
-  .particle { position: absolute; border-radius: 50%; background: rgba(212,119,138,0.25); animation: particleFloat ease-in-out infinite; }
-  .hope-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.05rem, 2.3vw, 1.3rem); color: var(--text-mid);
-    line-height: 1.85; max-width: 620px; margin: 0 auto 24px;
-  }
-  .hope-steps { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 36px; }
-  .hope-step {
-    background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
-    border: 1px solid var(--blush); border-radius: 14px;
-    padding: 18px 22px; max-width: 200px; text-align: center;
-  }
-  .hope-step-icon { font-size: 1.6rem; margin-bottom: 8px; }
-  .hope-step-label { font-size: 0.85rem; color: var(--text-mid); line-height: 1.5; }
+/* ============================================================
+   HOPE SECTION
+============================================================ */
+#hope {
+  background: linear-gradient(160deg, #f5e8ef 0%, #ede5f5 100%);
+  position: relative; overflow: hidden; text-align: center;
+}
+.particles-wrap { position: absolute; inset: 0; pointer-events: none; }
+.particle {
+  position: absolute; border-radius: 50%;
+  animation: particleFloat ease-in-out infinite;
+}
+.hope-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--text-mid);
+  line-height: 1.85; max-width: 600px; margin: 0 auto 20px;
+}
+.hope-steps {
+  display: flex; flex-wrap: wrap;
+  gap: 14px; justify-content: center; margin-top: 32px;
+}
+.hope-step {
+  background: rgba(255,255,255,0.72); backdrop-filter: blur(8px);
+  border: 1px solid var(--blush); border-radius: 14px;
+  padding: 16px 20px;
+  flex: 1 1 140px; max-width: 190px; text-align: center;
+}
+.hope-step-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.hope-step-label { font-size: 0.83rem; color: var(--text-mid); line-height: 1.5; }
 
-  /* ============================================================
-     HIDDEN PSSST
-  ============================================================ */
-  #pssst {
-    display: inline-block; cursor: pointer;
-    font-size: 0.72rem; color: var(--text-light);
-    letter-spacing: 0.12em; opacity: 0.5;
-    transition: opacity 0.3s; margin-top: 40px;
-  }
-  #pssst:hover { opacity: 1; }
+#pssst {
+  display: inline-block; cursor: pointer;
+  font-size: 0.7rem; color: var(--text-light);
+  letter-spacing: 0.12em; opacity: 0.45;
+  transition: opacity 0.3s; margin-top: 44px;
+  -webkit-tap-highlight-color: transparent;
+}
+#pssst:hover, #pssst:active { opacity: 1; }
 
-  /* ============================================================
-     MODAL
-  ============================================================ */
-  #modal-overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(58,42,53,0.55); backdrop-filter: blur(6px);
-    z-index: 2000; align-items: center; justify-content: center;
-    padding: 24px; animation: fadeIn 0.4s ease;
-  }
-  #modal-overlay.open { display: flex; }
-  .modal-card {
-    background: #fff; border-radius: var(--radius);
-    padding: clamp(30px, 6vw, 56px); max-width: 520px; width: 100%;
-    box-shadow: var(--shadow-strong); position: relative;
-    animation: fadeUp 0.45s ease;
-  }
-  .modal-close {
-    position: absolute; top: 18px; right: 20px;
-    background: none; border: none; font-size: 1.4rem;
-    cursor: pointer; color: var(--text-light); transition: color 0.2s;
-  }
-  .modal-close:hover { color: var(--rose); }
-  .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 400; color: var(--text-dark); margin-bottom: 28px;
-  }
-  .promise-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-  .promise-list li {
-    display: flex; gap: 14px; align-items: flex-start;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.08rem; color: var(--text-mid); line-height: 1.6;
-  }
-  .promise-list li::before { content: '🤍'; flex-shrink: 0; margin-top: 2px; }
+/* ============================================================
+   MODAL
+============================================================ */
+#modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(58,42,53,0.55); backdrop-filter: blur(6px);
+  z-index: 2000; align-items: center; justify-content: center;
+  padding: 20px;
+}
+#modal-overlay.open { display: flex; animation: fadeIn 0.35s ease; }
+.modal-card {
+  background: #fff; border-radius: var(--radius);
+  padding: clamp(28px, 6vw, 52px); max-width: 500px; width: 100%;
+  box-shadow: var(--shadow-strong); position: relative;
+  animation: fadeUp 0.4s ease;
+  max-height: 88svh; overflow-y: auto;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 18px;
+  background: none; border: none; font-size: 1.3rem;
+  cursor: pointer; color: var(--text-light); transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+}
+.modal-close:hover, .modal-close:active { color: var(--rose); }
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 400; color: var(--text-dark); margin-bottom: 24px;
+  padding-right: 28px;
+}
+.promise-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.promise-list li {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.08rem);
+  color: var(--text-mid); line-height: 1.65;
+}
+.promise-list li::before { content: '🤍'; flex-shrink: 0; margin-top: 2px; font-size: 0.9rem; }
 
-  /* ============================================================
-     FOOTER
-  ============================================================ */
-  footer {
-    padding: 60px 24px; text-align: center;
-    background: var(--cream-deep); border-top: 1px solid var(--blush);
-  }
-  .footer-heart { font-size: 1.4rem; display: inline-block; animation: heartBeat 1.4s ease-in-out infinite; margin: 0 6px; }
-  .footer-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-mid); }
-  .footer-year { margin-top: 10px; font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.1em; }
-
-  /* ============================================================
-   MOBILE FIX
-  ============================================================ */
-
-  @media (max-width: 768px) {
-
-    #music-btn,
-    #language-btn {
-      position: fixed;
-      bottom: 15px;
-      top: auto;
-      padding: 10px 14px;
-      font-size: 0.75rem;
-    }
-
-    #music-btn {
-      right: 15px;
-    }
-
-    #language-btn {
-      left: 15px;
-    }
-  }
+/* ============================================================
+   FOOTER
+============================================================ */
+footer {
+  padding: 56px 24px; text-align: center;
+  background: var(--cream-deep); border-top: 1px solid var(--blush);
+}
+.footer-heart { font-size: 1.3rem; display: inline-block; animation: heartBeat 1.4s ease-in-out infinite; margin: 0 5px; }
+.footer-text { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--text-mid); }
+.footer-year { margin-top: 8px; font-size: 0.72rem; color: var(--text-light); letter-spacing: 0.1em; }
 </style>
 </head>
 <body>
@@ -524,28 +493,25 @@
 <!-- Scroll progress bar -->
 <div id="progress-bar"></div>
 
-<!-- Fixed controls: language + music -->
+<!-- Fixed pill controls -->
 <div id="fixed-controls">
-  <div class="music-wrapper">
-    <button class="ctrl-btn" id="music-btn">🎵</button>
-    <div id="song-title"></div>
-  </div>
-  <button class="ctrl-btn lang-active" id="lang-btn">ID</button>
+  <button class="ctrl-btn" id="music-btn" aria-label="Putar musik">🎵</button>
+  <div id="song-title"></div>
+  <button class="ctrl-btn active-lang" id="lang-btn" aria-label="Ganti bahasa">EN</button>
 </div>
-<audio id="bg-music"></audio>
+
+<audio id="bg-music" loop></audio>
 
 <!-- ============================================================
      MUSIC INTRO OVERLAY
 ============================================================ -->
 <div id="music-overlay">
   <div class="music-box">
-    <p class="music-text">
-      🤍 This little surprise feels warmer with music.<br>
-      Would you like to play it while you read?
-    </p>
+    <div class="music-box-icon">🎵</div>
+    <p class="music-text" data-i18n="music.text"></p>
     <div class="music-actions">
-      <button id="music-yes" class="music-btn primary">Yes, play it 🎵</button>
-      <button id="music-no" class="music-btn">Continue without music</button>
+      <button id="music-yes" class="music-btn primary" data-i18n="music.yes"></button>
+      <button id="music-no" class="music-btn" data-i18n="music.no"></button>
     </div>
   </div>
 </div>
@@ -559,15 +525,15 @@
   <div class="heart-bg" style="top:75%;left:12%;font-size:1rem;animation-duration:7s;animation-delay:2s">🤍</div>
   <div class="heart-bg" style="top:65%;left:80%;font-size:2.2rem;animation-duration:5.8s;animation-delay:0.5s">🌸</div>
   <div class="heart-bg" style="top:45%;left:5%;font-size:1.4rem;animation-duration:6s;animation-delay:1.5s">🤍</div>
-  <div class="heart-bg" style="top:50%;left:92%;font-size:1.1rem;animation-duration:8s;animation-delay:3s">🌸</div>
   <div class="heart-bg" style="top:88%;left:55%;font-size:1.3rem;animation-duration:6.2s;animation-delay:0.8s">🤍</div>
-  <div class="heart-bg" style="top:5%;left:48%;font-size:0.9rem;animation-duration:7.5s;animation-delay:2.5s">🌸</div>
 
   <div class="hero-inner">
     <div class="hero-tag" data-i18n="hero.tag"></div>
     <h1 class="hero-title">Happy Birthday,<br><em>Rara</em> 🤍</h1>
     <p class="hero-subtitle" data-i18n="hero.subtitle"></p>
-    <a class="btn-primary" href="#letter" onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'});if(!playing){playMusic();}return false;" data-i18n="hero.cta"></a>
+    <a class="btn-primary" href="#letter"
+       onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'});return false;"
+       data-i18n="hero.cta"></a>
   </div>
   <div class="scroll-hint" data-i18n="hero.scroll"></div>
 </section>
@@ -579,16 +545,22 @@
   <div class="container">
     <p class="section-label reveal" data-i18n="letter.label"></p>
     <h2 class="reveal" data-i18n-html="letter.heading"></h2>
+
     <div class="letter-card reveal">
       <div class="letter-date" data-i18n="letter.date"></div>
+
+      <!-- Typing animation line -->
       <div id="typed-line"></div>
-      <p class="letter-p" id="letter-rest" style="opacity:0;transition:opacity 1s ease 0.5s" data-i18n="letter.p1"></p>
-      <p class="letter-p" style="opacity:0;transition:opacity 1s ease;transition-delay:0.5s" data-delayed data-i18n="letter.p2"></p>
-      <p class="letter-p" style="opacity:0;transition:opacity 1s ease;transition-delay:0.8s" data-delayed data-i18n="letter.p3"></p>
-      <p class="letter-p" style="opacity:0;transition:opacity 1s ease;transition-delay:1.1s" data-delayed data-i18n="letter.p4"></p>
-      <p class="letter-p" style="opacity:0;transition:opacity 1s ease;transition-delay:1.4s" data-delayed data-i18n="letter.p5"></p>
-      <p class="letter-p" style="opacity:0;transition:opacity 1s ease;transition-delay:1.4s" data-delayed data-i18n="letter.p6"></p>
-      <div class="letter-sign" style="opacity:0;transition:opacity 1s ease;transition-delay:1.7s" data-delayed data-i18n="letter.sign"></div>
+
+      <!-- Letter paragraphs — fade in on scroll -->
+      <p class="letter-p" id="letter-p1" style="opacity:0;transition:opacity 1s ease 0.3s" data-i18n="letter.p1"></p>
+      <p class="letter-p" style="opacity:0;transition:opacity 1s ease 0.6s" data-delayed data-i18n="letter.p2"></p>
+      <p class="letter-p" style="opacity:0;transition:opacity 1s ease 0.9s" data-delayed data-i18n="letter.p3"></p>
+      <p class="letter-p" style="opacity:0;transition:opacity 1s ease 1.2s" data-delayed data-i18n="letter.p4"></p>
+      <p class="letter-p" style="opacity:0;transition:opacity 1s ease 1.5s" data-delayed data-i18n="letter.p5"></p>
+      <p class="letter-p" style="opacity:0;transition:opacity 1s ease 1.8s" data-delayed data-i18n="letter.p6"></p>
+
+      <div class="letter-sign" style="opacity:0;transition:opacity 1s ease 2.1s" data-delayed data-i18n="letter.sign"></div>
     </div>
   </div>
 </section>
@@ -606,7 +578,7 @@
         <div class="tl-content">
           <div class="tl-image">🌷</div>
           <div class="tl-title" data-i18n="timeline.1.title"></div>
-          <div class="tl-desc" data-i18n="timeline.1.desc"></div>
+          <div class="tl-desc"  data-i18n="timeline.1.desc"></div>
         </div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-spacer"></div>
@@ -618,7 +590,7 @@
         <div class="tl-content">
           <div class="tl-image">🌸</div>
           <div class="tl-title" data-i18n="timeline.2.title"></div>
-          <div class="tl-desc" data-i18n="timeline.2.desc"></div>
+          <div class="tl-desc"  data-i18n="timeline.2.desc"></div>
         </div>
       </div>
 
@@ -626,7 +598,7 @@
         <div class="tl-content">
           <div class="tl-image">🕯️</div>
           <div class="tl-title" data-i18n="timeline.3.title"></div>
-          <div class="tl-desc" data-i18n="timeline.3.desc"></div>
+          <div class="tl-desc"  data-i18n="timeline.3.desc"></div>
         </div>
         <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
         <div class="tl-spacer"></div>
@@ -638,7 +610,7 @@
         <div class="tl-content">
           <div class="tl-image">🤍</div>
           <div class="tl-title" data-i18n="timeline.4.title"></div>
-          <div class="tl-desc" data-i18n="timeline.4.desc"></div>
+          <div class="tl-desc"  data-i18n="timeline.4.desc"></div>
         </div>
       </div>
 
@@ -656,7 +628,7 @@
     <div class="support-msg-box reveal">
       <p class="support-msg fade-in" id="support-msg" data-i18n="support.placeholder"></p>
     </div>
-    <button class="btn-support reveal" id="support-btn" onclick="nextMessage()" data-i18n="support.btn"></button>
+    <button class="btn-support reveal" id="support-btn" data-i18n="support.btn"></button>
     <p class="click-count reveal" id="click-count"></p>
   </div>
 </section>
@@ -666,7 +638,7 @@
 ============================================================ -->
 <section id="hope">
   <div class="particles-wrap" id="particles"></div>
-  <div class="container" style="position:relative;z-index:2;text-align:center;">
+  <div class="container" style="position:relative;z-index:2;">
     <p class="section-label reveal" data-i18n="hope.label"></p>
     <h2 class="reveal" data-i18n-html="hope.heading"></h2>
     <p class="hope-text reveal" data-i18n="hope.p1"></p>
@@ -689,8 +661,8 @@
         <div class="hope-step-label" data-i18n="hope.step4"></div>
       </div>
     </div>
-    <div style="margin-top:60px;">
-      <span id="pssst" onclick="openModal()" data-i18n="pssst"></span>
+    <div style="text-align:center;">
+      <span id="pssst" data-i18n="pssst"></span>
     </div>
   </div>
 </section>
@@ -700,9 +672,9 @@
 ============================================================ -->
 <div id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-card">
-    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <button class="modal-close" onclick="closeModal()" aria-label="Tutup">✕</button>
     <div class="modal-title" id="modal-title" data-i18n="modal.title"></div>
-    <ul class="promise-list" id="promise-list">
+    <ul class="promise-list">
       <li data-i18n="modal.p1"></li>
       <li data-i18n="modal.p2"></li>
       <li data-i18n="modal.p3"></li>
@@ -717,7 +689,9 @@
 ============================================================ -->
 <footer>
   <p class="footer-text">
-    <span data-i18n="footer.made"></span> <span class="footer-heart">🤍</span> <span data-i18n="footer.for"></span> <strong>Rara</strong>
+    <span data-i18n="footer.made"></span>
+    <span class="footer-heart">🤍</span>
+    <span data-i18n="footer.for"></span> <strong>Rara</strong>
   </p>
   <p class="footer-year" data-i18n="footer.year"></p>
 </footer>
@@ -726,417 +700,382 @@
      JAVASCRIPT
 ============================================================ -->
 <script>
-  /* ============================================================
-     TRANSLATIONS
-  ============================================================ */
-  const T = {
-    en: {
-      'hero.tag':      'For the one who holds the world together',
-      'hero.subtitle': 'Even in your hardest season, you are still the strongest person I know.',
-      'hero.cta':      'Open Your Letter',
-      'hero.scroll':   'scroll',
+/* ============================================================
+   TRANSLATIONS
+============================================================ */
+const T = {
+  id: {
+    'hero.tag':      'Untuk kamu yang menopang dunia dengan cintamu',
+    'hero.subtitle': 'Bahkan di musim terberatmu, kamu tetap orang terkuat yang aku kenal.',
+    'hero.cta':      'Buka Suratmu',
+    'hero.scroll':   'gulir',
 
-      'letter.label':   'A letter for you',
-      'letter.heading': 'Written from the <em>heart</em>',
-      'letter.date':    'March 2026 · From the one who loves you most',
-      'letter.typed':   'Dear Rara, the one I am proud to love —',
-      'letter.p1': 'I know this season has been heavier than anything you ever expected to carry. Watching the person you love most — your mother — face something so frightening, and having to be strong for everyone while quietly breaking inside… that is a weight I wish I could lift from your shoulders entirely. But I can\'t. And so instead, I want to sit beside you in it.',
-      'letter.p2': 'You are allowed to be tired, Rara. You are allowed to cry. You are allowed to have days where you don\'t feel strong at all — because even then, even on your most broken days, the love you carry for your family is the most extraordinary thing I have ever witnessed. That love is your strength.',
-      'letter.p3': 'You do not have to hold this alone. I am here. Not just for the easy, happy days — I am here for the hard ones. The exhausted ones. The days when you don\'t have words, and silence is the only honest thing left. I am staying.',
-      'letter.p4': 'I know some days feel heavier than others. And I can’t fix everything. But I can stand beside you through it.',
-      'letter.p5': 'I am so proud of who you are. Not just of your strength — but of your tenderness. Of the way your heart refuses to give up. Of the way you love so completely, even when it costs you everything. That is rare. That is you.',
-      'letter.p6': 'On this birthday, my only wish for you is this: let yourself be held. Let yourself receive care the way you so freely give it. You deserve softness too. You deserve rest. You deserve to know that you are deeply, completely, irreversibly loved — today and every day that follows.',
-      'letter.sign': 'Always yours, 🤍',
+    'letter.label':   'Sebuah surat untukmu',
+    'letter.heading': 'Ditulis dari lubuk <em>hati</em>',
+    'letter.date':    'Maret 2026 · Dari orang yang paling mencintaimu',
+    'letter.typed':   'Rara sayang, kamu yang dengan bangga aku cintai —',
+    'letter.p1': 'Aku tahu musim ini jauh lebih berat dari apa pun yang pernah kamu bayangkan harus kamu tanggung. Menyaksikan orang yang paling kamu cintai — ibumu — menghadapi sesuatu yang begitu menakutkan, dan harus kuat untuk semua orang sementara diam-diam hancur di dalam… itu adalah beban yang ingin aku angkat sepenuhnya dari bahumu. Tapi aku tidak bisa. Maka sebagai gantinya, aku ingin duduk bersamamu di dalamnya.',
+    'letter.p2': 'Kamu boleh merasa lelah, Rara. Kamu boleh menangis. Kamu boleh memiliki hari-hari di mana kamu sama sekali tidak merasa kuat — karena bahkan saat itu, bahkan di hari-harimu yang paling hancur, cinta yang kamu bawa untuk keluargamu adalah hal paling luar biasa yang pernah aku saksikan. Cinta itulah kekuatanmu.',
+    'letter.p3': 'Kamu tidak harus menanggung ini sendirian. Aku ada di sini. Bukan hanya untuk hari-hari yang mudah dan menyenangkan — aku ada di sini untuk hari-hari yang berat. Yang melelahkan. Hari-hari ketika kamu tidak punya kata-kata, dan diam adalah satu-satunya hal yang jujur tersisa. Aku akan tetap di sisimu.',
+    'letter.p4': 'Aku tahu beberapa hari terasa lebih berat daripada hari lainnya. Dan aku tidak bisa memperbaiki semuanya. Tapi aku bisa berada di sisimu melewati semua itu.',
+    'letter.p5': 'Aku sangat bangga menjadi orang yang mengenalmu. Bukan hanya karena kekuatanmu — tapi karena kelembutanmu. Karena cara hatimu menolak untuk menyerah. Karena cara kamu mencintai orang-orang sepenuhnya, bahkan ketika itu menghabiskan segalanya dari dirimu. Itu langka. Itulah kamu.',
+    'letter.p6': 'Di ulang tahunmu ini, satu-satunya harapanku untukmu adalah ini: biarkan dirimu dijaga. Biarkan dirimu menerima kasih sayang dengan cara yang sama bebasnya kamu memberikannya. Kamu juga berhak mendapat kelembutan. Kamu berhak istirahat. Kamu berhak tahu bahwa kamu dicintai dengan dalam, sepenuhnya, dan tanpa syarat — hari ini dan setiap hari sesudahnya.',
+    'letter.sign': 'Selalu milikmu, 🤍',
 
-      'timeline.label':   'Our story',
-      'timeline.heading': 'Moments I hold <em>close</em>',
-      'timeline.1.title': 'The Day We Met',
-      'timeline.1.desc':  'The world was ordinary until I looked at you. I didn\'t know yet how much that moment would change everything — but somewhere in me, something just knew.',
-      'timeline.2.title': 'Our First Laugh',
-      'timeline.2.desc':  'I remember the moment you laughed — really laughed — and I thought: that sound is something I want to protect for the rest of my life. It still makes my chest feel too small for my heart.',
-      'timeline.3.title': 'When You Needed Strength',
-      'timeline.3.desc':  'I watched you face something devastating with more grace than I thought possible. You didn\'t crumble. You bent — and you stayed. I have never admired anyone more than I admired you in that moment.',
-      'timeline.4.title': 'Why I Fell In Love With You',
-      'timeline.4.desc':  'It wasn\'t one moment. It was the accumulation of all of them — your quiet courage, your warmth, the way you love people completely without asking anything in return. I fell slowly, and then all at once.',
+    'timeline.label':   'Kisah kita',
+    'timeline.heading': 'Momen yang aku simpan <em>dalam hati</em>',
+    'timeline.1.title': 'Hari Kita Bertemu',
+    'timeline.1.desc':  'Dunia terasa biasa-biasa saja sampai aku melihatmu. Aku belum tahu betapa besar momen itu akan mengubah segalanya — tapi di suatu tempat dalam diriku, ada sesuatu yang langsung tahu.',
+    'timeline.2.title': 'Tawa Pertama Kita',
+    'timeline.2.desc':  'Aku ingat saat kamu tertawa — benar-benar tertawa — dan aku berpikir: suara itu adalah sesuatu yang ingin aku jaga sepanjang hidupku. Masih membuat dadaku terasa terlalu sempit untuk menampung hatiku.',
+    'timeline.3.title': 'Ketika Kamu Membutuhkan Kekuatan',
+    'timeline.3.desc':  'Aku menyaksikanmu menghadapi sesuatu yang menghancurkan dengan keanggunan yang lebih dari yang kukira mungkin. Kamu tidak runtuh. Kamu membungkuk — dan kamu tetap di sana. Aku tidak pernah mengagumi siapa pun lebih dari mengagumimu di momen itu.',
+    'timeline.4.title': 'Mengapa Aku Jatuh Cinta Padamu',
+    'timeline.4.desc':  'Bukan dari satu momen. Melainkan dari akumulasi semuanya — keberanianmu yang tenang, kehangatan hatimu, cara kamu mencintai orang-orang sepenuhnya tanpa meminta apa pun sebagai balasan. Aku jatuh perlahan, lalu sekaligus.',
 
-      'support.label':       'For the hard days',
-      'support.heading':     'Click when you need <em>strength</em>',
-      'support.placeholder': 'Press the button and let these words find you.',
-      'support.btn':         'I need a little strength right now',
-      'support.messages': [
-        "You are stronger than you think.",
-        "Your heart is bigger than your fear.",
-        "You deserve happiness too.",
-        "You are not alone. Not today. Not ever.",
-        "Being tired doesn't mean you've failed. It means you've been brave.",
-        "You are allowed to feel everything you are feeling.",
-        "Small steps are still steps forward.",
-        "The love you give your family is extraordinary. Don't forget to save some for yourself.",
-        "You are not carrying this alone. I am here.",
-        "Healing is not linear — and neither is strength.",
-        "You matter. Not just as a daughter, or a partner — but as you.",
-        "On the other side of this, there is light. I believe that with everything I have.",
-        "Even when you feel invisible, I see you. All of you.",
-        "Rest is not quitting. Rest is how you continue.",
-      ],
-      'support.count1': 'She pressed it once.',
-      'support.countN': (n) => `She's pressed it ${n} times. You are not alone.`,
+    'support.label':       'Untuk hari-hari yang berat',
+    'support.heading':     'Tekan saat kamu butuh <em>kekuatan</em>',
+    'support.placeholder': 'Tekan tombolnya dan biarkan kata-kata ini menemukanmu.',
+    'support.btn':         'Aku butuh sedikit kekuatan sekarang',
+    'support.messages': [
+      "Kamu lebih kuat dari yang kamu kira.",
+      "Hatimu lebih besar dari rasa takutmu.",
+      "Kamu juga berhak mendapat kebahagiaan.",
+      "Kamu tidak sendirian. Tidak hari ini. Tidak pernah.",
+      "Merasa lelah bukan berarti kamu gagal. Itu berarti kamu telah berani.",
+      "Kamu boleh merasakan semua yang kamu rasakan.",
+      "Langkah kecil tetaplah langkah maju.",
+      "Cinta yang kamu berikan untuk keluargamu luar biasa. Jangan lupa sisakan sedikit untuk dirimu sendiri.",
+      "Kamu tidak menanggung ini sendirian. Aku ada di sini.",
+      "Penyembuhan tidak selalu lurus — begitu pula kekuatan.",
+      "Kamu penting. Bukan hanya sebagai anak, atau pasangan — tapi sebagai dirimu sendiri.",
+      "Di sisi lain dari ini semua, ada cahaya. Aku percaya itu dengan sepenuh hatiku.",
+      "Bahkan saat kamu merasa tidak terlihat, aku melihatmu. Sepenuhnya.",
+      "Istirahat bukan berarti menyerah. Istirahat adalah cara kamu untuk terus melanjutkan.",
+    ],
+    'support.count1': 'Dia menekannya sekali.',
+    'support.countN': (n) => `Dia sudah menekannya ${n} kali. Kamu tidak sendirian.`,
 
-      'hope.label':   'For your mama',
-      'hope.heading': 'Healing is a <em>journey,</em> not a moment',
-      'hope.p1': 'Recovery doesn\'t happen in a straight line. There will be days that feel like setbacks and days that feel like miracles. Both are part of the story. Your mother is surrounded by love — yours, your family\'s — and that love is the most powerful medicine that exists.',
-      'hope.p2': 'I pray for her healing, step by step. I pray for your family\'s endurance. And I pray that in the middle of everything, you find small pockets of peace — a cup of tea in the quiet morning, a gentle exhale, a moment that reminds you that you are not fighting alone.',
-      'hope.step1': 'Healing takes time. Small progress is still progress.',
-      'hope.step2': 'It\'s okay to rest. Strength is not the same as never stopping.',
-      'hope.step3': 'Your love is medicine. Don\'t underestimate what you bring.',
-      'hope.step4': 'Brighter days are ahead — even if today is hard to see them.',
+    'hope.label':   'Untuk mama',
+    'hope.heading': 'Pemulihan adalah sebuah <em>perjalanan,</em> bukan satu momen',
+    'hope.p1': 'Pemulihan tidak terjadi dalam garis lurus. Akan ada hari-hari yang terasa seperti kemunduran, dan hari-hari yang terasa seperti keajaiban. Keduanya adalah bagian dari cerita ini. Ibumu dikelilingi oleh cinta — cintamu, cinta keluargamu — dan cinta itu adalah obat paling kuat yang ada.',
+    'hope.p2': 'Aku berdoa untuk kesembuhannya, selangkah demi selangkah. Aku berdoa untuk ketahanan keluargamu. Dan aku berdoa agar di tengah segalanya, kamu menemukan momen-momen kecil ketenangan — secangkir teh di pagi yang sunyi, tarikan napas yang lembut, sebuah momen yang mengingatkanmu bahwa kamu tidak berjuang sendirian.',
+    'hope.step1': 'Penyembuhan butuh waktu. Kemajuan kecil tetaplah kemajuan.',
+    'hope.step2': 'Tidak apa-apa untuk beristirahat. Kekuatan bukan berarti tidak pernah berhenti.',
+    'hope.step3': 'Cintamu adalah obat. Jangan meremehkan apa yang kamu bawa.',
+    'hope.step4': 'Hari-hari yang lebih cerah ada di depan — meski hari ini sulit untuk melihatnya.',
 
-      'pssst': 'pssst…',
+    'pssst': 'psst…',
 
-      'modal.title': 'A Promise To You 🤍',
-      'modal.p1': 'I promise to stay — not just when things are beautiful, but especially when they are hard.',
-      'modal.p2': 'I promise to be the kind of love that makes your life easier to carry, never heavier.',
-      'modal.p3': 'I promise to hold space for every version of you — the strong one, the tired one, the one who needs to cry without explanation.',
-      'modal.p4': 'I promise to celebrate your mother\'s every small step forward, because I know how much each one means to your heart.',
-      'modal.p5': 'I promise that this birthday is only one of many more we will celebrate together — with more joy, more healing, and more love than you can imagine right now.',
+    'modal.title': 'Sebuah Janji Untukmu 🤍',
+    'modal.p1': 'Aku berjanji untuk tetap ada — bukan hanya saat segalanya indah, tapi terutama saat segalanya terasa berat.',
+    'modal.p2': 'Aku berjanji untuk menjadi cinta yang membuat hidupmu lebih ringan untuk ditanggung, bukan lebih berat.',
+    'modal.p3': 'Aku berjanji untuk memberi ruang bagi setiap versi dirimu — yang kuat, yang lelah, yang butuh menangis tanpa penjelasan.',
+    'modal.p4': 'Aku berjanji untuk merayakan setiap langkah kecil kemajuan ibumu, karena aku tahu betapa berartinya setiap langkah itu bagimu.',
+    'modal.p5': 'Aku berjanji bahwa ulang tahun ini hanyalah satu dari banyak lagi yang akan kita rayakan bersama — dengan lebih banyak kebahagiaan, lebih banyak kesembuhan, dan lebih banyak cinta dari yang bisa kamu bayangkan sekarang.',
 
-      'footer.made': 'Made with',
-      'footer.for':  'for',
-      'footer.year': 'March 2026 · You are so deeply loved.',
-    },
+    'footer.made': 'Dibuat dengan',
+    'footer.for':  'untuk',
+    'footer.year': 'Maret 2026 · Kamu dicintai dengan sangat dalam.',
 
-    id: {
-      'hero.tag':      'Untuk kamu yang menopang dunia dengan cintamu',
-      'hero.subtitle': 'Bahkan di musim terberatmu, kamu tetap orang terkuat yang aku kenal.',
-      'hero.cta':      'Buka Suratmu',
-      'hero.scroll':   'gulir',
+    'music.text': 'Kejutan kecil ini terasa lebih hangat dengan musik. Mau diputar sambil membaca?',
+    'music.yes':  'Ya, putar musiknya 🎵',
+    'music.no':   'Lanjutkan tanpa musik',
+  },
 
-      'letter.label':   'Sebuah surat untukmu',
-      'letter.heading': 'Ditulis dari lubuk <em>hati</em>',
-      'letter.date':    'Maret 2026 · Dari orang yang paling mencintaimu',
-      'letter.typed':   'Rara sayang, kamu yang dengan bangga aku cintai —',
-      'letter.p1': 'Aku tahu musim ini jauh lebih berat dari apa pun yang pernah kamu bayangkan harus kamu tanggung. Menyaksikan orang yang paling kamu cintai — ibumu — menghadapi sesuatu yang begitu menakutkan, dan harus kuat untuk semua orang sementara diam-diam hancur di dalam… itu adalah beban yang ingin aku angkat sepenuhnya dari bahumu. Tapi aku tidak bisa. Maka sebagai gantinya, aku ingin duduk bersamamu di dalamnya.',
-      'letter.p2': 'Kamu boleh merasa lelah, Rara. Kamu boleh menangis. Kamu boleh memiliki hari-hari di mana kamu sama sekali tidak merasa kuat — karena bahkan saat itu, bahkan di hari-harimu yang paling hancur, cinta yang kamu bawa untuk keluargamu adalah hal paling luar biasa yang pernah aku saksikan. Cinta itulah kekuatanmu.',
-      'letter.p3': 'Kamu tidak harus menanggung ini sendirian. Aku ada di sini. Bukan hanya untuk hari-hari yang mudah dan menyenangkan — aku ada di sini untuk hari-hari yang berat. Yang melelahkan. Hari-hari ketika kamu tidak punya kata-kata, dan diam adalah satu-satunya hal yang jujur tersisa. Aku akan tetap di sisimu.',
-      'letter.p4': 'Aku tahu beberapa hari terasa lebih berat daripada hari lainnya. Dan aku tidak bisa memperbaiki semuanya. Tapi aku bisa berada di sisimu melewati semua itu.',
-      'letter.p5': 'Aku sangat bangga menjadi orang yang mengenalmu. Bukan hanya karena kekuatanmu — tapi karena kelembutanmu. Karena cara hatimu menolak untuk menyerah. Karena cara kamu mencintai orang-orang sepenuhnya, bahkan ketika itu menghabiskan segalanya dari dirimu. Itu langka. Itulah kamu.',
-      'letter.p6': 'Di ulang tahunmu ini, satu-satunya harapanku untukmu adalah ini: biarkan dirimu dijaga. Biarkan dirimu menerima kasih sayang dengan cara yang sama bebasnya kamu memberikannya. Kamu juga berhak mendapat kelembutan. Kamu berhak istirahat. Kamu berhak tahu bahwa kamu dicintai dengan dalam, sepenuhnya, dan tanpa syarat — hari ini dan setiap hari sesudahnya.',
-      'letter.sign': 'Selalu milikmu, 🤍',
+  en: {
+    'hero.tag':      'For the one who holds the world together',
+    'hero.subtitle': 'Even in your hardest season, you are still the strongest person I know.',
+    'hero.cta':      'Open Your Letter',
+    'hero.scroll':   'scroll',
 
-      'timeline.label':   'Kisah kita',
-      'timeline.heading': 'Momen yang aku simpan <em>dalam hati</em>',
-      'timeline.1.title': 'Hari Kita Bertemu',
-      'timeline.1.desc':  'Dunia terasa biasa-biasa saja sampai aku melihatmu. Aku belum tahu betapa besar momen itu akan mengubah segalanya — tapi di suatu tempat dalam diriku, ada sesuatu yang langsung tahu.',
-      'timeline.2.title': 'Tawa Pertama Kita',
-      'timeline.2.desc':  'Aku ingat saat kamu tertawa — benar-benar tertawa — dan aku berpikir: suara itu adalah sesuatu yang ingin aku jaga sepanjang hidupku. Masih membuat dadaku terasa terlalu sempit untuk menampung hatiku.',
-      'timeline.3.title': 'Ketika Kamu Membutuhkan Kekuatan',
-      'timeline.3.desc':  'Aku menyaksikanmu menghadapi sesuatu yang menghancurkan dengan keanggunan yang lebih dari yang kukira mungkin. Kamu tidak runtuh. Kamu membungkuk — dan kamu tetap di sana. Aku tidak pernah mengagumi siapa pun lebih dari mengagumimu di momen itu.',
-      'timeline.4.title': 'Mengapa Aku Jatuh Cinta Padamu',
-      'timeline.4.desc':  'Bukan dari satu momen. Melainkan dari akumulasi semuanya — keberanianmu yang tenang, kehangatan hatimu, cara kamu mencintai orang-orang sepenuhnya tanpa meminta apa pun sebagai balasan. Aku jatuh perlahan, lalu sekaligus.',
+    'letter.label':   'A letter for you',
+    'letter.heading': 'Written from the <em>heart</em>',
+    'letter.date':    'March 2026 · From the one who loves you most',
+    'letter.typed':   'Dear Rara, the one I am proud to love —',
+    'letter.p1': 'I know this season has been heavier than anything you ever expected to carry. Watching the person you love most — your mother — face something so frightening, and having to be strong for everyone while quietly breaking inside… that is a weight I wish I could lift from your shoulders entirely. But I can\'t. And so instead, I want to sit beside you in it.',
+    'letter.p2': 'You are allowed to be tired, Rara. You are allowed to cry. You are allowed to have days where you don\'t feel strong at all — because even then, even on your most broken days, the love you carry for your family is the most extraordinary thing I have ever witnessed. That love is your strength.',
+    'letter.p3': 'You do not have to hold this alone. I am here. Not just for the easy, happy days — I am here for the hard ones. The exhausted ones. The days when you don\'t have words, and silence is the only honest thing left. I am staying.',
+    'letter.p4': 'I know some days feel heavier than others. And I can\'t fix everything. But I can stand beside you through it.',
+    'letter.p5': 'I am so proud of who you are. Not just of your strength — but of your tenderness. Of the way your heart refuses to give up. Of the way you love so completely, even when it costs you everything. That is rare. That is you.',
+    'letter.p6': 'On this birthday, my only wish for you is this: let yourself be held. Let yourself receive care the way you so freely give it. You deserve softness too. You deserve rest. You deserve to know that you are deeply, completely, irreversibly loved — today and every day that follows.',
+    'letter.sign': 'Always yours, 🤍',
 
-      'support.label':       'Untuk hari-hari yang berat',
-      'support.heading':     'Tekan saat kamu butuh <em>kekuatan</em>',
-      'support.placeholder': 'Tekan tombolnya dan biarkan kata-kata ini menemukanmu.',
-      'support.btn':         'Aku butuh sedikit kekuatan sekarang',
-      'support.messages': [
-        "Kamu lebih kuat dari yang kamu kira.",
-        "Hatimu lebih besar dari rasa takutmu.",
-        "Kamu juga berhak mendapat kebahagiaan.",
-        "Kamu tidak sendirian. Tidak hari ini. Tidak pernah.",
-        "Merasa lelah bukan berarti kamu gagal. Itu berarti kamu telah berani.",
-        "Kamu boleh merasakan semua yang kamu rasakan.",
-        "Langkah kecil tetaplah langkah maju.",
-        "Cinta yang kamu berikan untuk keluargamu luar biasa. Jangan lupa sisakan sedikit untuk dirimu sendiri.",
-        "Kamu tidak menanggung ini sendirian. Aku ada di sini.",
-        "Penyembuhan tidak selalu lurus — begitu pula kekuatan.",
-        "Kamu penting. Bukan hanya sebagai anak, atau pasangan — tapi sebagai dirimu sendiri.",
-        "Di sisi lain dari ini semua, ada cahaya. Aku percaya itu dengan sepenuh hatiku.",
-        "Bahkan saat kamu merasa tidak terlihat, aku melihatmu. Sepenuhnya.",
-        "Istirahat bukan berarti menyerah. Istirahat adalah cara kamu untuk terus melanjutkan.",
-      ],
-      'support.count1': 'Dia menekannya sekali.',
-      'support.countN': (n) => `Dia sudah menekannya ${n} kali. Kamu tidak sendirian.`,
+    'timeline.label':   'Our story',
+    'timeline.heading': 'Moments I hold <em>close</em>',
+    'timeline.1.title': 'The Day We Met',
+    'timeline.1.desc':  'The world was ordinary until I looked at you. I didn\'t know yet how much that moment would change everything — but somewhere in me, something just knew.',
+    'timeline.2.title': 'Our First Laugh',
+    'timeline.2.desc':  'I remember the moment you laughed — really laughed — and I thought: that sound is something I want to protect for the rest of my life. It still makes my chest feel too small for my heart.',
+    'timeline.3.title': 'When You Needed Strength',
+    'timeline.3.desc':  'I watched you face something devastating with more grace than I thought possible. You didn\'t crumble. You bent — and you stayed. I have never admired anyone more than I admired you in that moment.',
+    'timeline.4.title': 'Why I Fell In Love With You',
+    'timeline.4.desc':  'It wasn\'t one moment. It was the accumulation of all of them — your quiet courage, your warmth, the way you love people completely without asking anything in return. I fell slowly, and then all at once.',
 
-      'hope.label':   'Untuk mama',
-      'hope.heading': 'Pemulihan adalah sebuah <em>perjalanan,</em> bukan satu momen',
-      'hope.p1': 'Pemulihan tidak terjadi dalam garis lurus. Akan ada hari-hari yang terasa seperti kemunduran, dan hari-hari yang terasa seperti keajaiban. Keduanya adalah bagian dari cerita ini. Ibumu dikelilingi oleh cinta — cintamu, cinta keluargamu — dan cinta itu adalah obat paling kuat yang ada.',
-      'hope.p2': 'Aku berdoa untuk kesembuhannya, selangkah demi selangkah. Aku berdoa untuk ketahanan keluargamu. Dan aku berdoa agar di tengah segalanya, kamu menemukan momen-momen kecil ketenangan — secangkir teh di pagi yang sunyi, tarikan napas yang lembut, sebuah momen yang mengingatkanmu bahwa kamu tidak berjuang sendirian.',
-      'hope.step1': 'Penyembuhan butuh waktu. Kemajuan kecil tetaplah kemajuan.',
-      'hope.step2': 'Tidak apa-apa untuk beristirahat. Kekuatan bukan berarti tidak pernah berhenti.',
-      'hope.step3': 'Cintamu adalah obat. Jangan meremehkan apa yang kamu bawa.',
-      'hope.step4': 'Hari-hari yang lebih cerah ada di depan — meski hari ini sulit untuk melihatnya.',
+    'support.label':       'For the hard days',
+    'support.heading':     'Click when you need <em>strength</em>',
+    'support.placeholder': 'Press the button and let these words find you.',
+    'support.btn':         'I need a little strength right now',
+    'support.messages': [
+      "You are stronger than you think.",
+      "Your heart is bigger than your fear.",
+      "You deserve happiness too.",
+      "You are not alone. Not today. Not ever.",
+      "Being tired doesn't mean you've failed. It means you've been brave.",
+      "You are allowed to feel everything you are feeling.",
+      "Small steps are still steps forward.",
+      "The love you give your family is extraordinary. Don't forget to save some for yourself.",
+      "You are not carrying this alone. I am here.",
+      "Healing is not linear — and neither is strength.",
+      "You matter. Not just as a daughter, or a partner — but as you.",
+      "On the other side of this, there is light. I believe that with everything I have.",
+      "Even when you feel invisible, I see you. All of you.",
+      "Rest is not quitting. Rest is how you continue.",
+    ],
+    'support.count1': 'She pressed it once.',
+    'support.countN': (n) => `She's pressed it ${n} times. You are not alone.`,
 
-      'pssst': 'psst…',
+    'hope.label':   'For your mama',
+    'hope.heading': 'Healing is a <em>journey,</em> not a moment',
+    'hope.p1': 'Recovery doesn\'t happen in a straight line. There will be days that feel like setbacks and days that feel like miracles. Both are part of the story. Your mother is surrounded by love — yours, your family\'s — and that love is the most powerful medicine that exists.',
+    'hope.p2': 'I pray for her healing, step by step. I pray for your family\'s endurance. And I pray that in the middle of everything, you find small pockets of peace — a cup of tea in the quiet morning, a gentle exhale, a moment that reminds you that you are not fighting alone.',
+    'hope.step1': 'Healing takes time. Small progress is still progress.',
+    'hope.step2': 'It\'s okay to rest. Strength is not the same as never stopping.',
+    'hope.step3': 'Your love is medicine. Don\'t underestimate what you bring.',
+    'hope.step4': 'Brighter days are ahead — even if today is hard to see them.',
 
-      'modal.title': 'Sebuah Janji Untukmu 🤍',
-      'modal.p1': 'Aku berjanji untuk tetap ada — bukan hanya saat segalanya indah, tapi terutama saat segalanya terasa berat.',
-      'modal.p2': 'Aku berjanji untuk menjadi cinta yang membuat hidupmu lebih ringan untuk ditanggung, bukan lebih berat.',
-      'modal.p3': 'Aku berjanji untuk memberi ruang bagi setiap versi dirimu — yang kuat, yang lelah, yang butuh menangis tanpa penjelasan.',
-      'modal.p4': 'Aku berjanji untuk merayakan setiap langkah kecil kemajuan ibumu, karena aku tahu betapa berartinya setiap langkah itu bagimu.',
-      'modal.p5': 'Aku berjanji bahwa ulang tahun ini hanyalah satu dari banyak lagi yang akan kita rayakan bersama — dengan lebih banyak kebahagiaan, lebih banyak kesembuhan, dan lebih banyak cinta dari yang bisa kamu bayangkan sekarang.',
+    'pssst': 'pssst…',
 
-      'footer.made': 'Dibuat dengan',
-      'footer.for':  'untuk',
-      'footer.year': 'Maret 2026 · Kamu dicintai dengan sangat dalam.',
-    }
-  };
+    'modal.title': 'A Promise To You 🤍',
+    'modal.p1': 'I promise to stay — not just when things are beautiful, but especially when they are hard.',
+    'modal.p2': 'I promise to be the kind of love that makes your life easier to carry, never heavier.',
+    'modal.p3': 'I promise to hold space for every version of you — the strong one, the tired one, the one who needs to cry without explanation.',
+    'modal.p4': 'I promise to celebrate your mother\'s every small step forward, because I know how much each one means to your heart.',
+    'modal.p5': 'I promise that this birthday is only one of many more we will celebrate together — with more joy, more healing, and more love than you can imagine right now.',
 
-  /* ============================================================
-     LANGUAGE SYSTEM
-  ============================================================ */
-  let currentLang = 'en'; // default Indonesian
+    'footer.made': 'Made with',
+    'footer.for':  'for',
+    'footer.year': 'March 2026 · You are so deeply loved.',
 
-  function applyLang(lang) {
-    const t = T[lang];
+    'music.text': 'This little surprise feels warmer with music. Would you like to play it while you read?',
+    'music.yes':  'Yes, play it 🎵',
+    'music.no':   'Continue without music',
+  }
+};
 
-    // Update all data-i18n (text)
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (t[key] !== undefined) el.textContent = t[key];
-    });
+/* ============================================================
+   LANGUAGE SYSTEM
+============================================================ */
+let currentLang = 'id'; // Default: Indonesian
 
-    // Update all data-i18n-html (innerHTML for italic etc)
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-      const key = el.getAttribute('data-i18n-html');
-      if (t[key] !== undefined) el.innerHTML = t[key];
-    });
+function applyLang(lang) {
+  const t = T[lang];
 
-    // Update support placeholder if no clicks yet
-    if (msgCount === 0) {
-      document.getElementById('support-msg').textContent = t['support.placeholder'];
-    }
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
 
-    // Update lang button label
-    const btn = document.getElementById('lang-btn');
-    btn.textContent = lang === 'id' ? 'EN' : 'ID';
-
-    // Update html lang attr
-    document.documentElement.lang = lang === 'id' ? 'id' : 'en';
+  // Reset support placeholder if not yet clicked
+  if (msgCount === 0) {
+    document.getElementById('support-msg').textContent = t['support.placeholder'];
   }
 
-  function toggleLang() {
-    currentLang = currentLang === 'id' ? 'en' : 'id';
-    // Brief fade transition
-    document.body.classList.add('lang-switching');
-    setTimeout(() => {
-      applyLang(currentLang);
-      document.body.classList.remove('lang-switching');
-    }, 220);
-  }
+  // Lang button shows the OTHER language (what you'll switch to)
+  document.getElementById('lang-btn').textContent = lang === 'id' ? 'EN' : 'ID';
+  document.documentElement.lang = lang;
+}
 
-  /* ============================================================
-     SCROLL PROGRESS BAR
-  ============================================================ */
+function toggleLang() {
+  currentLang = currentLang === 'id' ? 'en' : 'id';
+  document.body.classList.add('lang-switching');
+  setTimeout(() => {
+    applyLang(currentLang);
+    document.body.classList.remove('lang-switching');
+  }, 200);
+}
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+============================================================ */
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('progress-bar').style.width = Math.min(pct, 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   INTERSECTION OBSERVERS — reveal animations
+============================================================ */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// Letter paragraphs fade-in when letter section enters view
+const letterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      document.getElementById('letter-p1').style.opacity = '1';
+      document.querySelectorAll('[data-delayed]').forEach(el => el.style.opacity = '1');
+      letterObs.disconnect();
+    }
+  });
+}, { threshold: 0.08 });
+letterObs.observe(document.getElementById('letter'));
+
+// Timeline slide-in
+const tlObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); tlObs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.tl-item').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.12) + 's';
+  tlObs.observe(el);
+});
+
+/* ============================================================
+   TYPING ANIMATION
+============================================================ */
+const typedEl = document.getElementById('typed-line');
+let typedIdx = 0, typedStarted = false;
+
+function typeChar() {
+  const text = T[currentLang]['letter.typed'];
+  if (typedIdx < text.length) {
+    typedEl.textContent += text[typedIdx++];
+    setTimeout(typeChar, 46);
+  } else {
+    typedEl.style.borderRight = '2px solid transparent';
+    typedEl.style.animation = 'none';
+  }
+}
+
+new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !typedStarted) {
+      typedStarted = true;
+      setTimeout(typeChar, 500);
+    }
+  });
+}, { threshold: 0.2 }).observe(document.getElementById('letter'));
+
+/* ============================================================
+   SUPPORT MESSAGES
+============================================================ */
+let msgCount = 0;
+const msgEl   = document.getElementById('support-msg');
+const countEl = document.getElementById('click-count');
+
+document.getElementById('support-btn').addEventListener('click', () => {
+  msgCount++;
+  const msgs = T[currentLang]['support.messages'];
+  const idx  = (msgCount - 1) % msgs.length;
+  const t    = T[currentLang];
+  msgEl.classList.add('fade-out');
+  setTimeout(() => {
+    msgEl.textContent = msgs[idx];
+    msgEl.classList.remove('fade-out');
+    msgEl.classList.add('fade-in');
+  }, 400);
+  countEl.textContent = msgCount === 1 ? t['support.count1'] : t['support.countN'](msgCount);
+});
+
+/* ============================================================
+   PARTICLES
+============================================================ */
+const particleWrap = document.getElementById('particles');
+for (let i = 0; i < 16; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 18 + 5;
+  p.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*6+5}s;animation-delay:${Math.random()*4}s;opacity:${(Math.random()*0.3+0.1).toFixed(2)};background:${Math.random()>0.5?'rgba(212,119,138,0.22)':'rgba(155,127,168,0.22)'};`;
+  particleWrap.appendChild(p);
+}
+
+/* ============================================================
+   MODAL
+============================================================ */
+document.getElementById('pssst').addEventListener('click', () => {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ============================================================
+   MUSIC PLAYLIST
+============================================================ */
+const playlist = [
+  { title: "TWICE – The Best Thing I Ever Did", file: "The Best Thing I Ever Did Piano Cover.mp3" },
+  { title: "TWICE – One In A Million",           file: "ONE IN A MILLION  Piano Cover.mp3" },
+  { title: "TWICE – Feel Special",               file: "Feel Special PIANO COVER.mp3" },
+];
+let songIdx = 0, isPlaying = false;
+const audio     = document.getElementById('bg-music');
+const musicBtn  = document.getElementById('music-btn');
+const songTitle = document.getElementById('song-title');
+
+function loadSong(idx) {
+  audio.src = playlist[idx].file;
+  songTitle.textContent = playlist[idx].title;
+}
+function playMusic() {
+  loadSong(songIdx);
+  audio.volume = 0.35;
+  audio.play().catch(() => {});
+  isPlaying = true;
+  musicBtn.textContent = '⏭';
+  songTitle.classList.add('visible');
+}
+function nextSong() {
+  songIdx = (songIdx + 1) % playlist.length;
+  loadSong(songIdx);
+  audio.play().catch(() => {});
+}
+musicBtn.addEventListener('click', () => {
+  isPlaying ? nextSong() : playMusic();
+});
+
+/* ============================================================
+   MUSIC OVERLAY
+============================================================ */
+const overlay  = document.getElementById('music-overlay');
+document.getElementById('music-yes').addEventListener('click', () => {
+  playMusic(); overlay.style.display = 'none';
+});
+document.getElementById('music-no').addEventListener('click', () => {
+  overlay.style.display = 'none';
+});
+
+/* ============================================================
+   PARALLAX HERO (desktop only — skip on touch to save battery)
+============================================================ */
+if (!window.matchMedia('(hover: none)').matches) {
   window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
-    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    document.getElementById('progress-bar').style.width = pct + '%';
-  });
-
-  /* ============================================================
-     INTERSECTION OBSERVERS
-  ============================================================ */
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  const letterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        document.querySelectorAll('[data-delayed]').forEach(el => el.style.opacity = '1');
-        document.getElementById('letter-rest').style.opacity = '1';
-        letterObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.1 });
-  letterObserver.observe(document.getElementById('letter'));
-
-  const tlObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); tlObserver.unobserve(e.target); }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.tl-item').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.15) + 's';
-    tlObserver.observe(el);
-  });
-
-  /* ============================================================
-     TYPING ANIMATION
-  ============================================================ */
-  const typedEl = document.getElementById('typed-line');
-  let typedIndex = 0;
-  let typedStarted = false;
-
-  function typeChar() {
-    const text = T[currentLang]['letter.typed'];
-    if (typedIndex < text.length) {
-      typedEl.textContent += text[typedIndex];
-      typedIndex++;
-      setTimeout(typeChar, 48);
-    } else {
-      typedEl.style.borderRight = '2px solid transparent';
+    if (window.scrollY < window.innerHeight) {
+      document.getElementById('hero').style.backgroundPositionY = (window.scrollY * 0.3) + 'px';
     }
-  }
+  }, { passive: true });
+}
 
-  const typeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting && !typedStarted) {
-        typedStarted = true;
-        setTimeout(typeChar, 600);
-        typeObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.2 });
-  typeObserver.observe(document.getElementById('letter'));
-
-  /* ============================================================
-     SUPPORT MESSAGES
-  ============================================================ */
-  let msgCount = 0;
-  const msgEl = document.getElementById('support-msg');
-  const countEl = document.getElementById('click-count');
-
-  function nextMessage() {
-    msgCount++;
-    const msgs = T[currentLang]['support.messages'];
-    const idx = (msgCount - 1) % msgs.length;
-    msgEl.classList.add('fade-out');
-    setTimeout(() => {
-      msgEl.textContent = msgs[idx];
-      msgEl.classList.remove('fade-out');
-      msgEl.classList.add('fade-in');
-    }, 420);
-    const t = T[currentLang];
-    countEl.textContent = msgCount === 1 ? t['support.count1'] : t['support.countN'](msgCount);
-  }
-
-  /* ============================================================
-     PARTICLES (HOPE SECTION)
-  ============================================================ */
-  const particleWrap = document.getElementById('particles');
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 20 + 6;
-    p.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${Math.random()*6+5}s;animation-delay:${Math.random()*4}s;opacity:${Math.random()*0.35+0.1};background:${Math.random()>0.5?'rgba(212,119,138,0.22)':'rgba(155,127,168,0.22)'};`;
-    particleWrap.appendChild(p);
-  }
-
-  /* ============================================================
-     MODAL
-  ============================================================ */
-  function openModal() {
-    document.getElementById('modal-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.getElementById('modal-overlay').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-  /* ============================================================
-     MUSIC PLAYLIST
-  ============================================================ */
-  const playlist = [
-    {
-      title: "TWICE - The Best Thing I Ever Did",
-      file: "The Best Thing I Ever Did Piano Cover.mp3"
-    },
-    {
-      title: "TWICE - One In A Million",
-      file: "ONE IN A MILLION  Piano Cover.mp3"
-    },
-    {
-      title: "TWICE - Feel Special",
-      file: "Feel Special PIANO COVER.mp3"
-    }
-  ];
-
-  let currentSongIndex = 0;
-
-  /* ============================================================
-     MUSIC TOGGLE
-  ============================================================ */
-  const musicBtn  = document.getElementById('music-btn');
-  const audio     = document.getElementById('bg-music');
-  const songTitle = document.getElementById('song-title');
-
-  let playing = false;
-
-  function loadSong(index) {
-    currentSongIndex = index;
-    audio.src = playlist[index].file;
-    songTitle.textContent = playlist[index].title;
-  }
-
-  function playMusic() {
-    if (!audio.src) {
-      loadSong(currentSongIndex);
-    }
-
-    audio.volume = 0.35;
-    audio.play();
-    playing = true;
-    musicBtn.textContent = '⏭';
-  }
-
-  function nextSong() {
-    currentSongIndex++;
-    if (currentSongIndex >= playlist.length) {
-      currentSongIndex = 0;
-    }
-    loadSong(currentSongIndex);
-    audio.play();
-  }
-
-  musicBtn.addEventListener('click', () => {
-    if (!playing) {
-      playMusic();
-    } else {
-      nextSong();
-    }
-  });
-
-  /* ============================================================
-   MUSIC INTRO LOGIC
-  ============================================================ */
-
-  const overlay = document.getElementById('music-overlay');
-  const musicYes = document.getElementById('music-yes');
-  const musicNo  = document.getElementById('music-no');
-
-  musicYes.addEventListener('click', () => {
-    playMusic();
-    overlay.style.display = 'none';
-  });
-
-  musicNo.addEventListener('click', () => {
-    overlay.style.display = 'none';
-  });
-
-  /* ============================================================
-     PARALLAX HERO
-  ============================================================ */
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    if (scrollY < window.innerHeight) {
-      document.getElementById('hero').style.backgroundPositionY = (scrollY * 0.35) + 'px';
-    }
-  });
-
-  /* ============================================================
-     INIT — apply default language
-  ============================================================ */
-  applyLang(currentLang);
+/* ============================================================
+   LANG BUTTON EVENT + INIT
+============================================================ */
+document.getElementById('lang-btn').addEventListener('click', toggleLang);
+applyLang(currentLang);
 </script>
 </body>
 </html>
