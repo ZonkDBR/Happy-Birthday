@@ -493,6 +493,28 @@
   .footer-heart { font-size: 1.4rem; display: inline-block; animation: heartBeat 1.4s ease-in-out infinite; margin: 0 6px; }
   .footer-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--text-mid); }
   .footer-year { margin-top: 10px; font-size: 0.75rem; color: var(--text-light); letter-spacing: 0.1em; }
+
+  /* ============================================================
+   MOBILE FIX
+  ============================================================ */
+
+  @media (max-width: 768px) {
+
+    #music-btn,
+    #language-btn {
+      position: fixed;
+      bottom: 15px;
+      top: auto;
+    }
+
+    #music-btn {
+      right: 15px;
+    }
+
+    #language-btn {
+      left: 15px;
+    }
+  }
 </style>
 </head>
 <body>
